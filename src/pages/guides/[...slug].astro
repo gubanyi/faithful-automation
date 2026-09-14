@@ -1,0 +1,22 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import { mdxComponents } from '../../components/mdx';
+import Page from '../../layouts/Page.astro';
+import { getPublished } from '../../utils/content';
+
+export async function getStaticPaths() {
+	const guides = await getPublished('guides');
+	return guides.map((guide) => ({
+		params: { slug: guide.id },
+		props: guide,
+	}));
+}
+type Props = CollectionEntry<'guides'>;
+
+const guide = Astro.props;
+const { Content, headings } = await render(guide);
+---
+
+<Page {...guide.data} headings={headings}>
+	<Content components={mdxComponents} />
+</Page>

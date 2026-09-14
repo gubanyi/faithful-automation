@@ -1,0 +1,33 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import { mdxComponents } from '../components/mdx';
+
+const home = await getEntry('pages', 'index');
+if (!home) throw new Error('Add the home page content at src/content/pages/index.mdx.');
+
+const { title, subtitle, description, heroImage, heroAlt, heroCredit } = home.data;
+const { Content } = await render(home);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={subtitle ? `${title} | ${subtitle}` : title}
+			description={description}
+			image={heroImage}
+		/>
+	</head>
+	<body>
+		<Header />
+		<Hero title={title} subtitle={subtitle} image={heroImage} alt={heroAlt} credit={heroCredit} />
+		<main class="prose">
+			<Content components={mdxComponents} />
+		</main>
+		<Footer />
+	</body>
+</html>

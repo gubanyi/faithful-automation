@@ -1,0 +1,123 @@
+---
+title: What is AI?
+subtitle: What today's AI is, how it works, and why no one can fully see inside it.
+description: A plain-language explanation of modern AI (large language models, tokens, training data, retrieval, and reasoning) and why today's foundation models are effectively black boxes.
+toc: true
+next:
+  title: What do we know about AI and how humans use it?
+  href: /ai-and-humans/
+---
+
+You don't need to be a computer scientist to use AI wisely, but it helps to understand what is actually happening when you type a question into a chatbot. This page explains the essentials in plain language, and it builds to one important conclusion: today's most powerful AI systems are, in effect, *black boxes*.
+
+## "AI" is a big umbrella
+
+"Artificial intelligence" is a broad term for computer systems that perform tasks we normally associate with human intelligence. It has described many different technologies over the years:
+
+- **Chess engines.** IBM's [Deep Blue](https://www.ibm.com/history/deep-blue) defeated world chess champion Garry Kasparov in 1997. Today, free programs like [Stockfish](https://stockfishchess.org/) play far better than any human.
+- **Navigation.** [Google Maps uses machine learning](https://blog.google/products-and-platforms/products/maps/google-maps-101-how-ai-helps-predict-traffic-and-determine-routes/) to predict traffic and estimate when you'll arrive.
+- **Voice to text.** Phone dictation and automatic video captions rely on [speech recognition](https://www.ibm.com/think/topics/speech-recognition).
+- **Everyday recommendations.** Spam filters, streaming suggestions, and social media feeds use AI to decide what you see.
+
+Each of these systems is built for a narrow job. A chess engine can't give you directions, and a map app can't write an essay. (For a broader overview, see IBM's [What is artificial intelligence?](https://www.ibm.com/think/topics/artificial-intelligence))
+
+## What most people mean by "AI" today
+
+When people talk about AI today, they usually mean assistants like ChatGPT, Claude, Gemini, and Copilot. These are powered by **foundation models**: very large AI models, trained on enormous amounts of data, that can be adapted to a wide variety of tasks. Stanford researchers [coined the term in 2021](https://hai.stanford.edu/news/reflections-foundation-models) to describe this new kind of general-purpose AI.
+
+The foundation models behind today's assistants are **large language models (LLMs)**, trained on vast amounts of text to process and generate language. Many can now work with images and audio, too. And the assistants built on them connect the models to other technologies, such as web search, document readers, and tools for running code.
+
+The result is something genuinely new. Unlike a chess engine or a map app, these systems perform a wide range of **cognitive labor** that has traditionally required a person: drafting and editing, summarizing, analyzing, writing code, tutoring, answering questions, and giving advice.
+
+If you'd like to go deeper, Timothy B. Lee and Sean Trott's [Large language models, explained with a minimum of math and jargon](https://www.understandingai.org/p/large-language-models-explained-with) is an excellent, readable introduction, and 3Blue1Brown's [Large Language Models explained briefly](https://www.youtube.com/watch?v=LPZh9BOjkQs) covers the basics in a short video.
+
+## Built from neural networks no one fully understands
+
+LLMs are built from [neural networks](https://www.ibm.com/think/topics/neural-networks), a type of software loosely inspired by the brain. A neural network is made of layer upon layer of simple calculations, connected by numbers called **parameters** (or **weights**). During training, those numbers are nudged, a tiny amount at a time across an enormous number of examples, until the network becomes good at its task.
+
+The scale is hard to imagine. GPT-3, released in 2020, had 175 billion parameters. Counting them at one per second, without stopping, would take more than 5,500 years. Today's leading models are believed to be larger still, but most companies no longer say.
+
+Here is the surprising part: **no one writes an LLM's knowledge or skills into it line by line.** Engineers design the network's structure and the training process, but the abilities *emerge* from training. The result is a vast web of numbers that works remarkably well, yet can't be read like a recipe or a rulebook.
+
+Even the scientists who build these systems can't fully explain why they work so well. As *MIT Technology Review* put it, [large language models can do jaw-dropping things, but nobody knows exactly why](https://www.technologyreview.com/2024/03/04/1089403/large-language-models-amazing-but-nobody-knows-why/). A research field called **interpretability** is trying to change that. Anthropic researchers, for example, have [identified millions of concepts represented inside one of their models](https://www.anthropic.com/research/mapping-mind-language-model) and have [begun tracing the steps a model takes](https://www.anthropic.com/research/tracing-thoughts-language-model) to reach an answer. By their own account, though, these methods capture only a fraction of what happens inside the model, even for short, simple prompts. Anthropic's CEO has written about [the urgency of interpretability](https://darioamodei.com/post/the-urgency-of-interpretability) precisely because we still don't understand how these systems work.
+
+## One token at a time, with a roll of the dice
+
+So what does an LLM actually *do* when it answers you? At its core, it repeats one simple step: **predict the next token**.
+
+A **token** is a word or a piece of a word. A common word like "the" is usually a single token, while a longer word might be split into several pieces. (You can see how text gets divided with OpenAI's [tokenizer tool](https://platform.openai.com/tokenizer).)
+
+Given all the text so far (your question, plus anything the model has already written), the model calculates how likely each possible next token is. Then it **picks one at random, weighted by those probabilities**. The chosen token is added to the text, and the process repeats, token after token, until the response is complete.
+
+Try it yourself. Below, a model has read the start of a sentence and assigned a probability to each possible next word. (These numbers are made up for illustration. A real model weighs many thousands of possible tokens at every step.)
+
+<NextTokenDemo
+  prompt="The sailboat drifted slowly across the"
+  choices={[
+    { token: 'bay', probability: 38 },
+    { token: 'water', probability: 27 },
+    { token: 'lake', probability: 16 },
+    { token: 'harbor', probability: 11 },
+    { token: 'horizon', probability: 8 },
+  ]}
+/>
+
+This is why you can ask the same question twice and get two different answers. The randomness is real, but it isn't *arbitrary*. It's more like rolling heavily weighted dice: likely words come up often, and unlikely words come up occasionally. The companies and developers who build AI tools decide how much randomness to allow, balancing predictability against variety.
+
+It's remarkable that so much apparent intelligence emerges from this one step, repeated. It also means that **every response is a chain of weighted random choices, each shaped by billions of numbers no one can interpret.** For a deeper dive, see Stephen Wolfram's [What Is ChatGPT Doing … and Why Does It Work?](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/), or explore Georgia Tech's interactive [Transformer Explainer](https://poloclub.github.io/transformer-explainer/), which shows next-token probabilities as a real model generates text.
+
+## Trained on data we can't see
+
+Before an LLM can predict anything, it has to be **trained**. Developers feed it an enormous collection of text (websites, books, articles, code, and more), and the model adjusts its parameters to get better and better at predicting what comes next. Meta, for example, reported that its Llama 3 models were [pretrained on more than 15 trillion tokens](https://ai.meta.com/blog/meta-llama-3/), far more text than a person could read in thousands of lifetimes.
+
+That data isn't simply collected and poured in. It is filtered, curated, and supplemented. After this initial training, models are shaped further, often with human feedback, to teach them how to respond: what tone to take, what to refuse, and how to handle sensitive topics. Every one of those choices influences what a model "knows" and how it answers.
+
+Here is the concern: **the companies behind the leading AI assistants, including ChatGPT, Claude, and Gemini, do not disclose their models' training data or parameters.** OpenAI's GPT-4 technical report, for instance, [declined to share details about its training data, training methods, or even the model's size](https://arxiv.org/abs/2303.08774), citing competition and safety. Stanford's [Foundation Model Transparency Index](https://crfm.stanford.edu/fmti/December-2025/index.html) finds that major developers are least transparent about their training data, and that average transparency scores *dropped* sharply in 2025. Some companies release "open-weight" models whose parameters anyone can download, but they rarely publish the training data. Fully open models, such as [Ai2's OLMo](https://allenai.org/olmo), remain the exception.
+
+Why does this matter? Imagine asking an AI assistant:
+
+> *Explain whether it is ever right to lie to protect someone's feelings.*
+
+You'll get a thoughtful-sounding answer. But that answer is built on the model's foundational knowledge: patterns absorbed from training data you can't inspect, curated and shaped by people you'll never meet, according to priorities that aren't published. **We don't know where that knowledge came from**, let alone why the model's weighted dice produced *this particular sequence of words* in response.
+
+## Looking things up: retrieval-augmented generation
+
+A model's training data stops at a cutoff date, and no model memorizes everything. To answer questions about recent events, or about specific documents, AI systems often use **[retrieval-augmented generation](https://www.ibm.com/think/topics/retrieval-augmented-generation)**, or **RAG**.
+
+RAG works in three steps:
+
+1. **Search.** The system looks for relevant information: web pages, an organization's documents, or files you've uploaded.
+2. **Retrieve.** It selects the passages that seem most relevant to your question.
+3. **Generate.** It places those passages into the model's working memory (its **context**) alongside your question, and the model writes a response.
+
+RAG can make answers more current and more accurate, and it lets AI tools cite sources. But it doesn't change what the model fundamentally does. **The model is still generating one weighted-random token at a time**, so it can still misread a source, blend sources together, or invent details that appear in none of them. Stanford researchers found that even specialized legal research tools built this way [hallucinated on at least 1 in 6 benchmark questions](https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-or-more-benchmarking-queries). A *Columbia Journalism Review* study found that AI search tools [answered more than 60% of queries incorrectly](https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php) when asked to identify the source of a news excerpt.
+
+Retrieval also adds another layer you can't see. You rarely know everything the system searched for, what it found and left out, or why it favored one source over another.
+
+## "Thinking" before answering: reasoning models
+
+Many of today's most capable systems are **reasoning models**. Before giving a final answer, they generate a long stream of intermediate text: working through the problem step by step, trying different approaches, checking their work, and backing up when something doesn't add up.
+
+How does that fit with "one token at a time"? Remember that each new token is predicted from *everything that came before it*. When a model writes out intermediate steps, those steps become part of the text it builds on, like a scratchpad. Instead of leaping straight from question to answer, the model can take many smaller steps, each informed by the last. Researchers noticed years ago that simply prompting a model to [work through a problem step by step](https://arxiv.org/abs/2201.11903) improved its answers. Today's reasoning models are [specifically trained to reason this way](https://openai.com/index/learning-to-reason-with-llms/), and they may generate thousands of tokens of "thinking" before responding.
+
+The results can be dramatically better, especially in math, coding, and complex analysis. But this reasoning is largely hidden from view:
+
+- **Companies don't show you the raw reasoning.** OpenAI [chose not to show users its reasoning models' raw "chain of thought,"](https://openai.com/index/learning-to-reason-with-llms/) offering a model-written summary instead. Anthropic's documentation states that [no setting returns Claude's raw chain of thought](https://platform.claude.com/docs/en/build-with-claude/thinking); developers receive a summary or nothing at all.
+- **Even visible reasoning may not tell the whole story.** Anthropic researchers found that reasoning models [often leave out important factors that influenced their answers](https://www.anthropic.com/research/reasoning-models-dont-say-think). A tidy explanation isn't proof of how an answer was actually reached.
+- **Reasoning is hard to interpret.** It can be long and difficult to follow, and it is still produced by the same inscrutable network. Researchers from several leading AI companies have described our current ability to monitor AI reasoning as [a new and fragile opportunity](https://arxiv.org/abs/2507.11473), not a guarantee.
+
+## An ultra-intelligent black box
+
+Put all of this together, and a clear picture emerges. The foundation models behind tools like ChatGPT, Claude, and Gemini are extraordinarily capable. On many tasks, they write, analyze, and explain at a level that rivals skilled professionals. But they are **not transparent**. In practice, they are *ultra-intelligent black boxes*.
+
+<Callout variant="blackbox" title="What we can't see inside the box">
+
+- **The network.** Billions of parameters that no human can fully interpret.
+- **The word choices.** Every token is a weighted random pick.
+- **The training data.** Undisclosed, so we can't know where a model's foundational knowledge came from.
+- **The retrieval.** We rarely see everything that was searched, what was found, or why certain sources were chosen.
+- **The reasoning.** Hidden or summarized, and even visible reasoning may not reflect what actually drove the answer.
+
+</Callout>
+
+None of this means AI is useless, or that you should avoid it. It means we should treat it the way a good sailor treats the sea: with respect, attention, and a clear sense of where we are headed. Because we can't look inside the box, we have to pay close attention to how it behaves, and to how *we* behave when we use it.

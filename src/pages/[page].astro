@@ -1,0 +1,22 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { mdxComponents } from '../components/mdx';
+import Page from '../layouts/Page.astro';
+
+export async function getStaticPaths() {
+	// `index` is the home page, which src/pages/index.astro renders.
+	const pages = await getCollection('pages', ({ id }) => id !== 'index');
+	return pages.map((page) => ({
+		params: { page: page.id },
+		props: page,
+	}));
+}
+type Props = CollectionEntry<'pages'>;
+
+const page = Astro.props;
+const { Content, headings } = await render(page);
+---
+
+<Page {...page.data} headings={headings}>
+	<Content components={mdxComponents} />
+</Page>

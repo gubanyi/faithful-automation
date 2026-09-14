@@ -1,0 +1,213 @@
+---
+interface Choice {
+	token: string;
+	probability: number;
+}
+
+interface Props {
+	prompt: string;
+	choices: Choice[];
+}
+
+const { prompt, choices } = Astro.props;
+const total = choices.reduce((sum, choice) => sum + choice.probability, 0);
+const shares = choices.map(({ token, probability }) => ({ token, share: probability / total }));
+---
+
+<next-token-demo class="demo" data-shares={JSON.stringify(shares)}>
+	<p class="sentence">
+		{prompt} <span class="blank" data-blank>______</span>
+	</p>
+	<ul class="choices">
+		{
+			shares.map(({ token, share }) => (
+				<li data-choice>
+					<span class="token">{token}</span>
+					<span class="bar" aria-hidden="true">
+						<span style={`width: ${(share * 100).toFixed(1)}%`} />
+					</span>
+					<span class="share">{Math.round(share * 100)}%</span>
+					<span class="count" data-count />
+				</li>
+			))
+		}
+	</ul>
+	<div class="controls" data-controls hidden>
+		<button type="button" data-pick>Pick the next token</button>
+		<button type="button" class="secondary" data-reset hidden>Start over</button>
+	</div>
+	<p class="status" data-status aria-live="polite"></p>
+</next-token-demo>
+
+<script>
+	class NextTokenDemo extends HTMLElement {
+		connectedCallback() {
+			const shares: { token: string; share: number }[] = JSON.parse(this.dataset.shares ?? '[]');
+			const rows = Array.from(this.querySelectorAll<HTMLElement>('[data-choice]'));
+			const blank = this.querySelector<HTMLElement>('[data-blank]');
+			const status = this.querySelector<HTMLElement>('[data-status]');
+			const controls = this.querySelector<HTMLElement>('[data-controls]');
+			const pick = this.querySelector<HTMLButtonElement>('[data-pick]');
+			const reset = this.querySelector<HTMLButtonElement>('[data-reset]');
+			if (!blank || !status || !controls || !pick || !reset) return;
+
+			let counts = shares.map(() => 0);
+
+			const update = (chosen: number | null) => {
+				const picks = counts.reduce((sum, count) => sum + count, 0);
+				rows.forEach((row, i) => {
+					row.classList.toggle('chosen', i === chosen);
+					const count = row.querySelector('[data-count]');
+					if (count) count.textContent = counts[i] ? `×${counts[i]}` : '';
+				});
+				blank.textContent = chosen === null ? '______' : shares[chosen].token;
+				blank.classList.toggle('filled', chosen !== null);
+				pick.textContent = picks === 0 ? 'Pick the next token' : 'Pick again';
+				reset.hidden = picks === 0;
+				status.textContent =
+					chosen === null
+						? ''
+						: `Picked “${shares[chosen].token}.” ` +
+							(picks === 1 ? 'Pick again, and you may get a different word.' : `${picks} picks so far.`);
+			};
+
+			pick.addEventListener('click', () => {
+				// Weighted random choice: likely tokens come up often, unlikely ones occasionally.
+				let roll = Math.random();
+				let chosen = shares.findIndex(({ share }) => (roll -= share) < 0);
+				if (chosen === -1) chosen = shares.length - 1;
+				counts[chosen] += 1;
+				update(chosen);
+			});
+
+			reset.addEventListener('click', () => {
+				counts = shares.map(() => 0);
+				update(null);
+				pick.focus();
+			});
+
+			controls.hidden = false;
+		}
+	}
+
+	customElements.define('next-token-demo', NextTokenDemo);
+</script>
+
+<style>
+	.demo {
+		display: block;
+		margin: 0 0 1.5em;
+		padding: 1.25em 1.5em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 12px;
+		background: #fff;
+		box-shadow: 0 2px 6px rgba(var(--gray), 15%);
+	}
+	.sentence {
+		margin: 0 0 0.75em;
+		color: rgb(var(--black));
+		font-size: 1.15em;
+	}
+	.blank {
+		display: inline-block;
+		min-width: 4.5em;
+		padding: 0 0.3em;
+		border-bottom: 2px dashed var(--accent);
+		color: var(--accent);
+		font-weight: 700;
+		text-align: center;
+	}
+	.blank.filled {
+		border-bottom-style: solid;
+		color: var(--warm);
+	}
+	.choices {
+		margin: 0 0 1em;
+		padding: 0;
+		list-style: none;
+	}
+	.choices li {
+		display: grid;
+		grid-template-columns: 5.5em 1fr 2.75em 2.5em;
+		align-items: center;
+		gap: 0.75em;
+		margin: 0;
+		padding: 0.15em 0.5em;
+		border-radius: 6px;
+		font-size: 0.9em;
+	}
+	.choices li.chosen {
+		background: rgb(var(--warm-tint));
+		font-weight: 700;
+	}
+	.bar {
+		display: block;
+		height: 0.65em;
+		overflow: hidden;
+		border-radius: 999px;
+		background: rgb(var(--gray-light));
+	}
+	.bar > span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: var(--accent);
+	}
+	.chosen .bar > span {
+		background: var(--warm);
+	}
+	.share,
+	.count {
+		font-variant-numeric: tabular-nums;
+	}
+	.share {
+		text-align: right;
+	}
+	.count {
+		color: rgb(var(--gray));
+	}
+	.controls:not([hidden]) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75em;
+	}
+	button {
+		padding: 0.45em 1.1em;
+		border: 2px solid var(--accent);
+		border-radius: 999px;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.85em;
+		font-weight: 700;
+		cursor: pointer;
+	}
+	button:hover {
+		border-color: var(--accent-dark);
+		background: var(--accent-dark);
+	}
+	button.secondary {
+		background: transparent;
+		color: var(--accent);
+	}
+	button.secondary:hover {
+		background: rgb(var(--accent-tint));
+	}
+	button[hidden] {
+		display: none;
+	}
+	.status {
+		min-height: 1.5em;
+		margin: 0.75em 0 0;
+		color: rgb(var(--gray));
+		font-size: 0.85em;
+	}
+	@media (max-width: 720px) {
+		.demo {
+			padding: 1em;
+		}
+		.choices li {
+			grid-template-columns: 4.75em 1fr 2.5em 2em;
+			gap: 0.5em;
+		}
+	}
+</style>

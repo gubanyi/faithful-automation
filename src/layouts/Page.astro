@@ -1,0 +1,212 @@
+---
+import type { ImageMetadata, MarkdownHeading } from 'astro';
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
+
+interface Props {
+	title: string;
+	description: string;
+	subtitle?: string;
+	pubDate?: Date;
+	updatedDate?: Date;
+	heroImage?: ImageMetadata;
+	heroAlt?: string;
+	toc?: boolean;
+	next?: { title: string; href: string };
+	headings?: MarkdownHeading[];
+}
+
+const {
+	title,
+	description,
+	subtitle,
+	pubDate,
+	updatedDate,
+	heroImage,
+	heroAlt = '',
+	toc = false,
+	next,
+	headings = [],
+} = Astro.props;
+
+const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth === 3) : [];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} image={heroImage} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1.5em;
+				padding: 1em 0 0;
+				text-align: center;
+			}
+			.title h1 {
+				margin: 0 0 0.3em 0;
+				font-size: clamp(2.1em, 5vw, 3.052em);
+				line-height: 1.1;
+			}
+			.subtitle {
+				max-width: 34em;
+				margin: 0 auto 1em;
+				color: rgb(var(--gray));
+				font-size: 1.1em;
+				line-height: 1.45;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			.toc {
+				margin: 0 0 2.5em;
+				padding: 1em 1.25em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: rgba(var(--gray-light), 35%);
+				font-size: 0.85em;
+			}
+			.toc p {
+				margin: 0 0 0.4em;
+				color: rgb(var(--black));
+				font-weight: 700;
+			}
+			.toc ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.toc li {
+				margin: 0.2em 0;
+			}
+			.toc .depth-3 {
+				padding-left: 1.25em;
+			}
+			.toc a {
+				text-decoration: none;
+			}
+			.toc a:hover {
+				text-decoration: underline;
+			}
+			.next {
+				display: block;
+				margin: 3em 0 0;
+				padding: 1em 1.25em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				text-decoration: none;
+				transition:
+					box-shadow 0.2s ease,
+					border-color 0.2s ease;
+			}
+			.next:hover {
+				border-color: var(--accent);
+				box-shadow: var(--box-shadow);
+			}
+			.next-label {
+				display: block;
+				color: rgb(var(--gray));
+				font-size: 0.75em;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+			.next-title {
+				display: block;
+				color: rgb(var(--black));
+				font-size: 1.1em;
+				font-weight: 700;
+				line-height: 1.35;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				{
+					heroImage && (
+						<div class="hero-image">
+							<Image width={1020} height={510} src={heroImage} alt={heroAlt} />
+						</div>
+					)
+				}
+				<div class="prose">
+					<div class="title">
+						{
+							pubDate && (
+								<div class="date">
+									<FormattedDate date={pubDate} />
+									{updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+										</div>
+									)}
+								</div>
+							)
+						}
+						<h1>{title}</h1>
+						{subtitle && <p class="subtitle">{subtitle}</p>}
+						<hr />
+					</div>
+					{
+						tocHeadings.length > 0 && (
+							<nav class="toc" aria-labelledby="toc-title">
+								<p id="toc-title">On this page</p>
+								<ul>
+									{tocHeadings.map(({ depth, slug, text }) => (
+										<li class={`depth-${depth}`}>
+											<a href={`#${slug}`}>{text}</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						)
+					}
+					<slot />
+					{
+						next && (
+							<a class="next" href={withBase(next.href)}>
+								<span class="next-label">Up next</span>
+								<span class="next-title">
+									{next.title} <span aria-hidden="true">→</span>
+								</span>
+							</a>
+						)
+					}
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

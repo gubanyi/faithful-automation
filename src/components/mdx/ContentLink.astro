@@ -1,0 +1,14 @@
+---
+// Renders links in MDX content: root-relative links (`/framework/`) get the
+// site's base path, and external links open in a new tab.
+import type { HTMLAttributes } from 'astro/types';
+import { withBase } from '../../utils/paths';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, ...props } = Astro.props;
+const url = href?.toString();
+const isExternal = url !== undefined && /^https?:\/\//.test(url);
+---
+
+<a href={url && withBase(url)} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} {...props}><slot /></a>

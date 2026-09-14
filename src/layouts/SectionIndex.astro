@@ -1,0 +1,146 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { mdxComponents } from '../components/mdx';
+import { SITE_TITLE } from '../consts';
+import { getSection, SECTION_PATHS, type Section } from '../utils/content';
+import { withBase } from '../utils/paths';
+
+interface Props {
+	section: Section;
+}
+
+const { section } = Astro.props;
+const { intro, entries } = await getSection(section);
+const { Content } = await render(intro);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${intro.data.title} | ${SITE_TITLE}`} description={intro.data.description} />
+		<style>
+			main {
+				width: 960px;
+			}
+			.intro {
+				width: 720px;
+				max-width: 100%;
+				margin: 0 auto 2.5em;
+			}
+			.intro h1 {
+				padding-top: 0.5em;
+				text-align: center;
+			}
+			.intro hr {
+				margin-bottom: 1.5em;
+			}
+			.entries {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+				gap: 1.5rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.entry {
+				display: block;
+				box-sizing: border-box;
+				height: 100%;
+				padding: 1.25em 1.5em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+				color: inherit;
+				text-decoration: none;
+				transition:
+					box-shadow 0.2s ease,
+					border-color 0.2s ease;
+			}
+			a.entry:hover {
+				border-color: var(--accent);
+				box-shadow: var(--box-shadow);
+			}
+			a.entry:hover .entry-title {
+				color: var(--accent);
+			}
+			.draft .entry {
+				border-style: dashed;
+				background: rgba(255, 255, 255, 60%);
+			}
+			.entry img {
+				display: block;
+				width: 100%;
+				margin-bottom: 0.75rem;
+			}
+			.badge {
+				display: inline-block;
+				margin: 0 0 0.6em;
+				padding: 0.1em 0.65em;
+				border-radius: 999px;
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				font-size: 0.7em;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+			}
+			.entry-title {
+				margin: 0 0 0.25em;
+				font-size: 1.25em;
+			}
+			.date,
+			.description {
+				margin: 0;
+				font-size: 0.85em;
+			}
+			.date {
+				color: rgb(var(--gray));
+			}
+			.description {
+				line-height: 1.5;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="prose intro">
+				<h1>{intro.data.title}</h1>
+				<hr />
+				<Content components={mdxComponents} />
+			</div>
+			<ul class="entries">
+				{
+					entries.map((entry) => {
+						const { title, description, pubDate, heroImage, heroAlt = '', draft } = entry.data;
+						const Tag = draft ? 'div' : 'a';
+						return (
+							<li class:list={{ draft }}>
+								<Tag
+									class="entry"
+									href={draft ? undefined : withBase(`${SECTION_PATHS[section]}${entry.id}/`)}
+								>
+									{heroImage && <Image width={720} height={360} src={heroImage} alt={heroAlt} />}
+									{draft && <p class="badge">Coming soon</p>}
+									<h2 class="entry-title">{title}</h2>
+									{pubDate && (
+										<p class="date">
+											<FormattedDate date={pubDate} />
+										</p>
+									)}
+									<p class="description">{description}</p>
+								</Tag>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

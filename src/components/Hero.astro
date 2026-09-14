@@ -1,0 +1,115 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+
+interface Props {
+	title: string;
+	subtitle?: string;
+	image?: ImageMetadata;
+	alt?: string;
+	credit?: { label: string; url: string };
+}
+
+const { title, subtitle, image, alt = '', credit } = Astro.props;
+---
+
+<section class="hero">
+	{
+		image && (
+			<Picture
+				src={image}
+				alt={alt}
+				widths={[640, 960, 1280, 1920, 2400]}
+				sizes="100vw"
+				formats={['avif', 'webp']}
+				loading="eager"
+				fetchpriority="high"
+			/>
+		)
+	}
+	<div class="hero-text">
+		<h1>{title}</h1>
+		{subtitle && <p>{subtitle}</p>}
+	</div>
+	{
+		credit && (
+			<a class="hero-credit" href={credit.url} target="_blank" rel="noopener noreferrer">
+				{credit.label}
+			</a>
+		)
+	}
+</section>
+<style>
+	.hero {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* Never wider than 2.5:1, so the sailboat stays in frame. */
+		min-height: max(28rem, min(78vh, 40vw));
+		overflow: hidden;
+		background: #0c4f55;
+		color: #fff;
+		text-align: center;
+	}
+	.hero :global(picture),
+	.hero :global(img) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.hero :global(img) {
+		object-fit: cover;
+		object-position: 50% 46%;
+		border-radius: 0;
+	}
+	/* Darken the top of the photo so the title stays readable over the sky. */
+	.hero::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to bottom,
+			rgb(3 33 38 / 0.6),
+			rgb(3 33 38 / 0.2) 45%,
+			rgb(3 33 38 / 0) 70%
+		);
+	}
+	.hero-text {
+		position: relative;
+		z-index: 1;
+		max-width: 44rem;
+		padding: clamp(3rem, 12vh, 7rem) 1.5rem 0;
+		text-shadow: 0 1px 12px rgb(0 0 0 / 0.35);
+	}
+	h1 {
+		margin: 0;
+		color: #fff;
+		font-size: clamp(2.5rem, 7vw, 4.5rem);
+		line-height: 1.05;
+	}
+	.hero-text p {
+		margin: 0.75rem 0 0;
+		font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+		line-height: 1.35;
+	}
+	.hero-credit {
+		position: absolute;
+		right: 1rem;
+		bottom: 0.75rem;
+		z-index: 1;
+		color: rgb(255 255 255 / 0.8);
+		font-size: 0.7rem;
+		text-decoration: none;
+	}
+	.hero-credit:hover {
+		color: #fff;
+		text-decoration: underline;
+	}
+	@media (max-width: 720px) {
+		.hero {
+			min-height: max(30rem, 72svh);
+		}
+	}
+</style>

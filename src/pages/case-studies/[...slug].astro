@@ -1,0 +1,22 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import { mdxComponents } from '../../components/mdx';
+import Page from '../../layouts/Page.astro';
+import { getPublished } from '../../utils/content';
+
+export async function getStaticPaths() {
+	const caseStudies = await getPublished('caseStudies');
+	return caseStudies.map((caseStudy) => ({
+		params: { slug: caseStudy.id },
+		props: caseStudy,
+	}));
+}
+type Props = CollectionEntry<'caseStudies'>;
+
+const caseStudy = Astro.props;
+const { Content, headings } = await render(caseStudy);
+---
+
+<Page {...caseStudy.data} headings={headings}>
+	<Content components={mdxComponents} />
+</Page>

@@ -1,0 +1,44 @@
+---
+import { FOOTER_LINKS, SITE_AUTHOR } from '../consts';
+import { withBase } from '../utils/paths';
+
+const today = new Date();
+---
+
+<footer>
+	<ul class="footer-links">
+		{
+			FOOTER_LINKS.map(({ href, label }) => (
+				<li>
+					<a href={withBase(href)}>{label}</a>
+				</li>
+			))
+		}
+	</ul>
+	<p>&copy; {today.getFullYear()} {SITE_AUTHOR}. All rights reserved.</p>
+</footer>
+<style>
+	footer {
+		padding: 2em 1em 6em 1em;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		color: rgb(var(--gray));
+		text-align: center;
+	}
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		gap: 1.5em;
+		margin: 0 0 0.5em;
+		padding: 0;
+		list-style: none;
+	}
+	.footer-links a {
+		color: rgb(var(--gray));
+	}
+	.footer-links a:hover {
+		color: var(--accent);
+	}
+	p {
+		margin: 0;
+	}
+</style>

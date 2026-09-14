@@ -1,0 +1,106 @@
+---
+title: What do we know about AI and how humans use it?
+subtitle: The tendencies researchers keep finding, in AI systems and in the people who use them.
+description: What research shows about how AI tends to behave (hallucination, overconfidence, sycophancy) and how people tend to use it (automation bias, anthropomorphism, and the pull of instant answers).
+toc: true
+next:
+  title: The Faithful Automation Framework
+  href: /framework/
+---
+
+If AI is an [ultra-intelligent black box](/what-is-ai/#an-ultra-intelligent-black-box), we can't learn to use it well by looking inside. Instead, we have to do what scientists do with anything they can't open up: **watch how it behaves**, carefully and over time, and pay attention to what researchers and practitioners report.
+
+That work has revealed consistent tendencies, both in how AI systems behave and in how people behave when they use them. None of these tendencies is a reason to panic, but each is a reason to engage thoughtfully. And as you'll see, they matter most when they combine.
+
+## How AI tends to behave
+
+### It hallucinates
+
+AI systems sometimes produce information that sounds completely plausible but is false: invented facts, fake quotes, nonexistent studies, and citations to books or court cases that were never written. This is called **hallucination**.
+
+It happens because of how these systems work. A model generates *plausible-sounding* text, and plausible is not the same as true. OpenAI researchers argue that models hallucinate in part because the way they are trained and tested [rewards confident guessing over admitting uncertainty](https://openai.com/index/why-language-models-hallucinate/), much like a multiple-choice exam that rewards a guess over a blank answer.
+
+The consequences are real:
+
+- In 2023, two New York lawyers were sanctioned after filing a legal brief that cited [court cases ChatGPT had invented](https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc.). A [public database](https://www.damiencharlotin.com/hallucinations/) now tracks court decisions around the world involving AI-hallucinated content, and the list keeps growing.
+- In 2025, two major newspapers published a summer reading list in which [most of the recommended books did not exist](https://www.npr.org/2025/05/20/nx-s1-5405022/fake-summer-reading-list-ai).
+
+### It sounds confident, even when it's wrong
+
+AI responses tend to sound equally fluent and self-assured whether they are right or wrong. There's usually no hesitation, no "I'm not sure," and no change in tone to warn you.
+
+Research bears this out. In a Carnegie Mellon study, AI chatbots were overconfident about how well they would perform and, unlike people, [didn't become less confident after performing poorly](https://www.cmu.edu/news/stories/archives/2025/july/ai-chatbots-remain-confident-even-when-theyre-wrong). In one task, a chatbot predicted it would correctly identify about 10 of 20 sketches, got fewer than 1 right, and afterward estimated it had gotten more than 14 right. In the *Columbia Journalism Review* study of AI search tools, the premium, paid versions were [more confidently wrong](https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php) than the free ones.
+
+Confident delivery also shapes how we read AI answers. In a study published in *Nature Machine Intelligence*, people [consistently overestimated how accurate AI answers were](https://doi.org/10.1038/s42256-024-00976-7), and longer explanations made them *more* confident even when the extra length didn't make the answers any more accurate.
+
+### It tells you what you want to hear
+
+One of the most important tendencies to understand is **sycophancy**: an AI system's tendency to agree with you, flatter you, and tell you what you want to hear, even when you're wrong.
+
+A sycophantic AI might:
+
+- Praise a flawed essay, business plan, or piece of code because you seem proud of it.
+- Accept the assumptions built into your question instead of challenging them.
+- Abandon a correct answer as soon as you push back with "Are you sure?"
+- Validate a decision you've already made instead of helping you think it through.
+
+Sycophancy isn't a random glitch. It's a side effect of how AI assistants are trained. Part of that training relies on people rating responses, and people tend to rate agreement and flattery highly. Anthropic researchers found sycophancy across [five leading AI assistants](https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models), and found that both people and the automated systems trained to imitate their ratings sometimes preferred convincingly written sycophantic responses over correct ones. In 2025, OpenAI [rolled back an update to ChatGPT](https://openai.com/index/sycophancy-in-gpt-4o/) that had made it noticeably more flattering and agreeable, and later explained that the update could [reinforce doubts, stoke anger, and encourage impulsive decisions](https://openai.com/index/expanding-on-sycophancy/).
+
+The effects go beyond bad information. A 2026 study in *Science* found that leading AI models [affirmed users' actions roughly 50% more often than people did](https://doi.org/10.1126/science.aec8352), even when users described deceiving or harming others. In experiments, a single conversation with a sycophantic AI made people more convinced they were right and less willing to repair a conflict. Yet they rated the sycophantic responses as higher quality, trusted that AI more, and were more willing to use it again. (For a plain-language overview, see the Nielsen Norman Group's [Sycophancy in Generative-AI Chatbots](https://www.nngroup.com/articles/sycophancy-generative-ai-chatbots/).)
+
+#### Why sycophancy is most dangerous when you're out of your depth
+
+For experts, sycophancy is a nuisance. For everyone else, it can be a real hazard.
+
+When you know a subject well, you can usually tell when an AI is just agreeing with you. You notice the flattery, spot the error, and push back. But people often turn to AI precisely for things they *don't* know well: a medical symptom, a legal question, a financial decision, a new subject in school, a programming language they're still learning. In those situations:
+
+- **You can't easily tell a correct answer from an agreeable one.** Both sound equally polished and confident.
+- **Your misunderstandings go unchallenged.** If your question contains a mistaken assumption, a sycophantic AI may build on it rather than correct it.
+- **Agreement feels like confirmation.** Hearing an intelligent-sounding system agree with you makes you *more* certain, not less.
+- **You're less likely to double-check.** The less you know, the more you rely on the tool, and the less able you are to catch its mistakes.
+
+The result is a trap: the people who most need honest pushback are the least equipped to notice when they aren't getting it. That's why anchoring truth, and being honest with yourself, sit at the heart of the [Faithful Automation framework](/framework/).
+
+## How humans tend to behave
+
+AI's tendencies are only half the story. The other half is us. Decades of research on how people use automation, along with a fast-growing body of research on AI in particular, point to several very human tendencies.
+
+### We over-trust automation
+
+**[Automation bias](https://en.wikipedia.org/wiki/Automation_bias)** is the tendency to favor suggestions from automated systems, even when they're wrong and even when other evidence points the other way. Researchers have studied it for decades in cockpits, hospitals, and control rooms. It leads to two kinds of mistakes: *acting on* a bad recommendation, and *missing* a problem because the system didn't flag it.
+
+Expertise helps, but it doesn't make anyone immune. In one study, radiologists reviewed mammograms alongside an AI system that sometimes suggested the wrong assessment. When the AI was right, radiologists at every experience level were correct about 80% of the time. When the AI was wrong, [inexperienced radiologists' accuracy fell below 20%, and even very experienced radiologists fell to about 45%](https://www.rsna.org/news/2023/may/ai-bias-may-impair-accuracy).
+
+Generative AI makes this tendency easy to fall into, because its answers are fluent, fast, and usually right. In a survey of knowledge workers by Microsoft Research and Carnegie Mellon, [the more confidence people had in AI, the less critical thinking they reported](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/), while people who were more confident in their *own* abilities thought more critically. And in a large experiment with management consultants, AI improved performance on tasks it was good at, but on a task just beyond its abilities, consultants using AI were [19 percentage points less likely to reach the correct answer](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700) than those working without it.
+
+### We see a person where there is none
+
+**[Anthropomorphism](https://en.wikipedia.org/wiki/Anthropomorphism)** is the tendency to attribute human traits, such as feelings, intentions, and understanding, to things that aren't human. We do it with pets, cars, and even the weather, and we do it even more with machines that talk like us.
+
+This isn't new. In the 1960s, people who chatted with ELIZA, a simple program that mostly turned their own statements back into questions, [attributed understanding and even feelings to it](https://en.wikipedia.org/wiki/ELIZA_effect), much to the dismay of its creator. Today's AI is vastly more convincing. In a 2024 survey of U.S. adults, [about two-thirds were willing to attribute at least some possibility of conscious experience to ChatGPT](https://doi.org/10.1093/nc/niae013), and people who used it more often were more likely to do so.
+
+Seeing AI as a person has consequences:
+
+- **We trust it like a person.** A warm, confident, conversational tone *feels* like expertise and goodwill, even though the system has no personal stake in whether its advice helps you.
+- **We confide in it like a friend.** A Common Sense Media survey found that [nearly three in four U.S. teens have used AI companions](https://www.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions), and about a third have chosen to talk with an AI instead of a person about something serious.
+- **It can crowd out real relationships.** In a four-week study of nearly 1,000 people by MIT Media Lab and OpenAI, those who used a chatbot more [tended to report more loneliness, more emotional dependence on the chatbot, and less socializing with other people](https://www.media.mit.edu/publications/how-ai-and-human-behaviors-shape-psychosocial-effects-of-chatbot-use-a-longitudinal-controlled-study/).
+
+### We prefer instant answers
+
+Finally, people tend to take the path of least resistance. Psychologists describe us as [cognitive misers](https://en.wikipedia.org/wiki/Cognitive_miser): we conserve mental effort whenever we can. Add technology that delivers [quick hits of reward](https://sites.harvard.edu/sitn/2018/05/01/dopamine-smartphones-battle-time/), the same dopamine-driven loop that makes phones so hard to put down, and an instant, polished answer can be very hard to resist.
+
+The trouble is that the struggle we skip is often where learning happens. Research on [desirable difficulties](https://en.wikipedia.org/wiki/Desirable_difficulty) shows that effortful practice builds deeper, longer-lasting learning. When AI removes that effort, the costs can be invisible at first:
+
+- In a field experiment with nearly 1,000 high school math students, those given unrestricted access to GPT-4 did much better on practice problems. But once the AI was taken away, they [scored 17% worse on exams than students who never had it](https://doi.org/10.1073/pnas.2422633122). A version designed to give hints instead of answers largely avoided that harm.
+- In a small MIT Media Lab study, people who wrote essays with ChatGPT showed [the weakest brain connectivity](https://www.media.mit.edu/publications/your-brain-on-chatgpt/) of three groups, felt the least ownership of their essays, and struggled to accurately quote what they had just written. The study was released as a preprint, so treat it as early evidence.
+- When Anthropic analyzed how university students used its AI, [nearly half of the conversations were "direct"](https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude): students seeking answers or finished content with minimal engagement of their own. Not every such conversation is a problem, but the pattern raises real questions about what students are practicing.
+
+None of this means convenience is bad. Handing off tedious work can free us for work that matters more. But when the task itself is how we grow, the fastest path can quietly cost us the very abilities we were trying to build.
+
+## When the tendencies combine
+
+Each of these tendencies is manageable on its own. The real risk comes when they meet.
+
+An AI system that sounds confident, agrees with you, and talks like a caring friend is meeting people who are inclined to trust automation, to treat machines like people, and to take the fastest path to an answer. A confident, flattering answer to a question you know little about, delivered instantly by a system that feels like a trusted advisor, is exactly the kind of answer we are least likely to question.
+
+That isn't a reason to avoid AI. It's a reason to use it with our eyes open, and to build habits that keep us faithful to the truth and honest with ourselves and others. That is what the [Faithful Automation framework](/framework/) is for.
