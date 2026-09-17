@@ -4,7 +4,7 @@
 
 Faithful Automation is meant to be used one task at a time. It doesn't assume AI is inherently good or inherently bad. Rather, it asks about purpose, truth, thinking, and relationships before, during, and after you use AI.
 
-Website: <https://gubanyi.github.io/faithful-automation/>
+Website: <https://faithfulautomation.org/>
 
 ## Purpose
 
@@ -85,7 +85,7 @@ src/
 - **Navigation links:** `src/consts.ts`.
 - **A new page:** add `src/content/pages/<name>.mdx` with a `title` and `description`. It is published at `/<name>/`.
 - **A new guide or case study:** add an MDX file to `src/content/guides/` or `src/content/case-studies/`. Set `draft: true` to list it as "Coming soon" without publishing a page; add a `pubDate` when it goes live.
-- **Links:** write internal links from the site root (for example, `/framework/`). The `/faithful-automation` base path is added automatically, and external links open in a new tab.
+- **Links:** write internal links from the site root (for example, `/framework/`). External links open in a new tab.
 
 MDX files can use these components without importing them:
 
@@ -99,12 +99,12 @@ MDX files can use these components without importing them:
 
 All commands are run from the root of the project:
 
-| Command           | Action                                                         |
-| :---------------- | :------------------------------------------------------------- |
-| `npm install`     | Install dependencies                                           |
-| `npm run dev`     | Start the dev server at `localhost:4321/faithful-automation/` |
-| `npm run build`   | Build the production site to `./dist/`                         |
-| `npm run preview` | Preview the build locally                                      |
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Install dependencies                         |
+| `npm run dev`     | Start the dev server at `localhost:4321`     |
+| `npm run build`   | Build the production site to `./dist/`       |
+| `npm run preview` | Preview the build locally                    |
 
 ## Credits
 

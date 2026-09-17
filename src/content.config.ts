@@ -30,6 +30,10 @@ function articles(folder: string) {
 			z.object({
 				title: z.string(),
 				description: z.string(),
+				// Shown beneath the title.
+				subtitle: z.string().optional(),
+				// Show an "On this page" list built from the page's headings.
+				toc: z.boolean().default(false),
 				// Transform string to Date object
 				pubDate: z.coerce.date().optional(),
 				updatedDate: z.coerce.date().optional(),

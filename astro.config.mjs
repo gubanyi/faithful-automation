@@ -6,7 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// The site is served from https://gubanyi.github.io/faithful-automation/
+	// The site is served from https://faithfulautomation.org/
 	site: 'https://faithfulautomation.org',
 	integrations: [mdx(), sitemap()],
 	fonts: [

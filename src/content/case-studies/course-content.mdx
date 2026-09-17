@@ -1,0 +1,92 @@
+---
+title: Creating Course Content with AI
+subtitle: How I use AI to draft review materials and exams, and how the six questions shape that process.
+description: How a computer science professor uses AI to draft review materials and exams, worked through with the Faithful Automation framework.
+pubDate: 2026-09-17
+toc: true
+---
+
+I teach computer science, and I use AI to help create course content. Building an exam and its review materials is a good example. AI handles much of the mundane work (e.g., formatting, some word-smithing), while the parts that depend on knowing my course and my students stay with me.
+
+## How I build review materials and exams
+
+I start with the review materials, including sample questions, and then build the exam questions. Both generally follow the same process:
+
+1. **Gather the materials.** I collect all of my course materials relevant to the exam and consider the learning outcomes I'm assessing.
+2. **Picture the result.** I build a mental image of what I want the exam to look like, including its format and blend of questions (e.g., multiple-choice, short-answer, writing code snippets).
+3. **Generate questions in batches.** I share all of this with Copilot and ask it to generate questions in batches. For example, I might ask for 10 multiple-choice questions assessing a set of learning outcomes. I usually type out my ideas, though voice chat or voice-to-text is a helpful option for talking through content efficiently.
+4. **Select and revise.** I review each question, select some of them, and iterate with Copilot to edit them into what I want.
+5. **Fix the distractors.** For multiple-choice questions, AI tends to write incorrect answer choices (distractors) that are somewhat obvious. I usually tweak them based on what I know about my course and what my students should be able to tell apart.
+6. **Review for correctness.** I edit the final content and review it thoroughly for correctness.
+
+My knowledge of my course and my students is essential throughout. It matters most with distractors, where the question is what my students should be able to distinguish.
+
+## Where the time goes: formatting
+
+In my experience, teachers spend a lot of time formatting course content (e.g., changing font sizes, adjusting margins, bolding key terms). I'm a perfectionist, and I want my materials to look just right. Doing that by hand takes so much time. I use AI to do it efficiently.
+
+Note that it takes time to build skill in getting AI to produce content in the format you want. AI often generates poorly formatted content, which I used to just edit and reformat myself... As I gradually developed workflows that work well for me, my productivity in developing course content went up a lot.
+
+Because of my background in software development, my workflow has sometimes shifted toward having AI generate LaTeX code, which I then compile into PDF documents. That probably won't work well for most teachers, since it depends on familiarity with LaTeX and software development fundamentals.
+
+I also use Microsoft Word and other Office applications heavily, especially when I need to be closely involved in the creation process, as I am with exams. The challenge with Word is that pasting AI output into a document means doing some formatting. So I often ask Copilot to generate content in a specific format that I can paste into Word with minimal reformatting.
+
+## Why I use Copilot with enterprise data protection
+
+My prompts include course materials and draft exam questions, so it matters which AI tool I use and how I sign in. I use Microsoft 365 Copilot (which Microsoft has recently renamed Microsoft Copilot) with my university account, which provides enterprise data protection. According to Microsoft's documentation:
+
+- Prompts and responses are [covered by the same contractual terms](https://learn.microsoft.com/en-us/microsoft-365/copilot/enterprise-data-protection) that protect an organization's email and files in Microsoft 365, with Microsoft acting as a data processor.
+- Prompts, responses, and the organizational data Copilot accesses [aren't used to train foundation models](https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy).
+- The data is encrypted, kept separate from other organizations, and subject to the institution's own policies (e.g., retention, auditing).
+
+Note that when Copilot searches the web, the short search queries it sends to Bing fall under different terms than my prompts, though Microsoft removes user and organization identifiers from them.
+
+If your institution offers an AI tool with protections like these, use it, and sign in with your school account. Microsoft's [plain-language overview](https://support.microsoft.com/en-us/privacy/data-protection-when-using-microsoft-365-copilot-chat-for-work-or-school) explains what's covered.
+
+## Applying the Faithful Automation framework
+
+Here's how I answer the six questions of the [Faithful Automation framework](/framework/) for this work.
+
+### Approach
+
+**What task am I completing, and what is its purpose?**
+
+I'm building content to support my teaching. The review materials help students prepare, and the exam assesses the learning outcomes I've set. Ultimately, the purpose is supporting my students' learning.
+
+**What is my intent in using AI for this task?**
+
+My intent is twofold. First, I want to support my students' learning with well-structured course content that I otherwise may not have had the time to create. Second, productivity and efficiency.
+
+### Engage
+
+**How am I anchoring truth, knowing AI is neither transparent nor fully trustworthy?**
+
+I only use AI to generate content in domains where I have expertise. The process is also heavily iterative, and I'm constantly evaluating what Copilot generates. Because I engage with it this way, it rarely produces anything I'm not familiar with. If it did, I would correct it, since it shouldn't be adding ideas from outside my course materials and prompts.
+
+My expertise and care are what allow me to develop course content despite issues like [sycophancy](/ai-and-humans/#it-tells-you-what-you-want-to-hear). I also review the final content thoroughly for correctness.
+
+**How am I stewarding my own thinking, knowing that tasks shape who I become?**
+
+Creating course content draws on my expertise and experience, and doing that work is also how I develop and maintain them. When I decide which learning outcomes to assess, picture what the exam should look like, choose which questions to keep, and rewrite distractors based on what my students should be able to tell apart, I'm exercising the same expertise that lets me use AI well in the first place.
+
+That's why I can't offload all of the thinking. If I let AI do it, I'd likely start to lose the expertise I rely on to catch its mistakes. So I stay heavily engaged. I guide the conversation and try to recognize any ideas that originate from AI instead of me.
+
+What I hand to AI is the mundane work: formatting, and sometimes the word-smithing of specific questions.
+
+### Reflect
+
+**Did AI replace human connections that strengthen my relationships?**
+
+Developing content like this is largely an individual activity. But I do need to think carefully about how students perceive it.
+
+I disclose to my students that I use AI to draft course materials, both in lecture and in course information (e.g., the syllabus). I also talk with them about how an experienced, knowledgeable teacher using AI to develop course content is very different from a student using AI for coursework. Creating course content is partially formative, which is why I stay heavily engaged in the process. Student coursework is entirely formative, so using AI in a way the coursework didn't intend [defeats its purpose](/ai-and-humans/#we-prefer-instant-answers).
+
+**How did AI affect the joy I find in my work?**
+
+Creating content is less joyful when I use AI, because I'm less involved in the nitty-gritty of the work. Some content I still create entirely on my own. My favorite lectures and assignments, for example, I keep polishing myself instead of using AI.
+
+Most of the joy I find in teaching comes from working with students, not from creating content. Saving time on content creation matters a lot to me, because I'm very busy. I cherish the time I can invest more directly in my students, and even more, the time I spend with my family.
+
+## A suggestion for other teachers
+
+My LaTeX workflow probably isn't the right starting point for most teachers. Rather, I'd recommend trying out different ways of using AI alongside the tools you're already familiar with (e.g., Microsoft Word) to reduce the mundane work of word-smithing and formatting. Expect it to take some time to find a workflow that works for you, as it did for me.

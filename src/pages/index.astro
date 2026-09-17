@@ -5,12 +5,23 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import { mdxComponents } from '../components/mdx';
+import { SITE_TITLE } from '../consts';
+import { withBase } from '../utils/paths';
 
 const home = await getEntry('pages', 'index');
 if (!home) throw new Error('Add the home page content at src/content/pages/index.mdx.');
 
 const { title, subtitle, description, heroImage, heroAlt, heroCredit } = home.data;
 const { Content } = await render(home);
+
+// Tells Google the site's name (https://developers.google.com/search/docs/appearance/site-names).
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: SITE_TITLE,
+	url: new URL(withBase('/'), Astro.site).href,
+	description,
+};
 ---
 
 <!doctype html>
@@ -20,6 +31,8 @@ const { Content } = await render(home);
 			title={subtitle ? `${title} | ${subtitle}` : title}
 			description={description}
 			image={heroImage}
+			imageAlt={heroAlt}
+			structuredData={structuredData}
 		/>
 	</head>
 	<body>

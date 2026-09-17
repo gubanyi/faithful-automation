@@ -40,7 +40,13 @@ const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth ==
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} image={heroImage} />
+		<BaseHead
+			title={`${title} | ${SITE_TITLE}`}
+			description={description}
+			image={heroImage}
+			imageAlt={heroAlt || undefined}
+			article={pubDate && { headline: title, publishedDate: pubDate, updatedDate }}
+		/>
 		<style>
 			main {
 				width: calc(100% - 2em);

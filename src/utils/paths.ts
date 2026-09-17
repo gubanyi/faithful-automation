@@ -1,7 +1,7 @@
 /**
- * Prefixes a root-relative path with the site's base path, so `/framework/`
- * becomes `/faithful-automation/framework/`. External URLs and in-page
- * anchors are returned unchanged.
+ * Prefixes a root-relative path with the `base` set in astro.config.mjs, if
+ * any (e.g., with `base: '/docs'`, `/framework/` becomes `/docs/framework/`).
+ * External URLs and in-page anchors are returned unchanged.
  */
 export function withBase(path: string): string {
 	if (/^([a-z][a-z\d+.-]*:|\/\/|#)/i.test(path)) return path;
