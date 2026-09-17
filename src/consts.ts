@@ -2,8 +2,7 @@
 // Page text lives in `src/content/`.
 
 export const SITE_TITLE = 'Faithful Automation';
-export const SITE_DESCRIPTION =
-	'Faithful to the truth. Honest with yourself and others. A practical framework for using AI thoughtfully.';
+export const SITE_DESCRIPTION = 'A framework of questions for discerning whether and how to use AI.';
 export const SITE_AUTHOR = 'Marcus Gubanyi';
 
 // Main navigation, in display order. Paths are relative to the site's base path.

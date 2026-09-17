@@ -1,8 +1,8 @@
 # Faithful Automation
 
-**Faithful to the truth. Honest with yourself and others.**
+**A framework of questions for discerning whether and how to use AI**
 
-Faithful Automation is a practical framework for deciding whether and how to use artificial intelligence, one task at a time. Rather than assuming that AI is inherently good or inherently bad, it encourages careful reflection on purpose, truth, thinking, and relationships before, during, and after we use it.
+Faithful Automation is meant to be used one task at a time. It doesn't assume AI is inherently good or inherently bad. Rather, it asks about purpose, truth, thinking, and relationships before, during, and after you use AI.
 
 Website: <https://gubanyi.github.io/faithful-automation/>
 
@@ -44,22 +44,22 @@ Faithful Automation helps individuals and organizations answer questions such as
 - **Guides** (in progress): Practical guidance for specific contexts, starting with teaching, learning, and coding.
 - **Case Studies** (in progress): Real and hypothetical scenarios showing that good decisions about AI often require more than a simple "use AI" or "don't use AI."
 - **Resources:** A curated list of the research and explainers cited on the site.
-- **About:** The story behind the project.
+- **About:** Who is behind the project, and the questions it starts from.
 
 ## Core convictions
 
 - Technology is a tool, not an authority.
-- Efficiency is valuable, but it is not the highest good.
+- Efficiency is valuable. It just isn't the highest good.
 - People are more than producers of output.
 - Learning and growth often matter as much as the finished product.
 - Decisions about automation should consider their effects on people, relationships, and communities.
-- Good judgment requires both wisdom and context.
+- Discernment requires both wisdom and context.
 
 ## Contributing case studies
 
-Future versions of the site will include community-submitted case studies. Submissions will be reviewed and curated before publication.
+Future versions of the site will include case studies submitted by the community. Submissions will be reviewed and curated before they're published.
 
-The goal is to build a collection of examples that help others navigate complex questions about AI in their own work and lives.
+The goal is a collection of examples that help others work through hard questions about AI in their own work and lives.
 
 ## Working on the site
 

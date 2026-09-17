@@ -41,12 +41,13 @@ const { title, subtitle, image, alt = '', credit } = Astro.props;
 </section>
 <style>
 	.hero {
+		/* Never wider than 2.5:1, so the sailboat stays in frame. */
+		--hero-height: max(28rem, min(78vh, 40vw));
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		/* Never wider than 2.5:1, so the sailboat stays in frame. */
-		min-height: max(28rem, min(78vh, 40vw));
+		min-height: var(--hero-height);
 		overflow: hidden;
 		background: #0c4f55;
 		color: #fff;
@@ -80,7 +81,8 @@ const { title, subtitle, image, alt = '', credit } = Astro.props;
 		position: relative;
 		z-index: 1;
 		max-width: 44rem;
-		padding: clamp(3rem, 12vh, 7rem) 1.5rem 0;
+		/* Space above the title scales with the hero (not the window), so the text stays above the sail. */
+		padding: calc(var(--hero-height) * 0.12) 1.5rem 0;
 		text-shadow: 0 1px 12px rgb(0 0 0 / 0.35);
 	}
 	h1 {
@@ -88,11 +90,13 @@ const { title, subtitle, image, alt = '', credit } = Astro.props;
 		color: #fff;
 		font-size: clamp(2.5rem, 7vw, 4.5rem);
 		line-height: 1.05;
+		text-wrap: balance;
 	}
 	.hero-text p {
 		margin: 0.75rem 0 0;
 		font-size: clamp(1.15rem, 2.6vw, 1.6rem);
 		line-height: 1.35;
+		text-wrap: balance;
 	}
 	.hero-credit {
 		position: absolute;
@@ -109,7 +113,7 @@ const { title, subtitle, image, alt = '', credit } = Astro.props;
 	}
 	@media (max-width: 720px) {
 		.hero {
-			min-height: max(30rem, 72svh);
+			--hero-height: max(30rem, 72svh);
 		}
 	}
 </style>
