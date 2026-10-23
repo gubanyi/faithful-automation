@@ -1,0 +1,20 @@
+---
+// A stacked pyramid of <PyramidLevel> items. Write levels top to bottom;
+// each one is drawn wider than the one above it.
+interface Props {
+	label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="pyramid" role="list" aria-label={label}><slot /></div>
+<style>
+	.pyramid {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.4em;
+		margin: 0 0 1.75em;
+	}
+</style>

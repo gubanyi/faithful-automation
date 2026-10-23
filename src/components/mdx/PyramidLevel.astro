@@ -1,0 +1,99 @@
+---
+import { withBase } from '../../utils/paths';
+
+interface Props {
+	title: string;
+	eyebrow?: string;
+	href?: string;
+	// Draws this level in the accent color.
+	highlight?: boolean;
+}
+
+const { title, eyebrow, href, highlight = false } = Astro.props;
+---
+
+<div class:list={['level', { highlight }]} role="listitem">
+	{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+	<p class="title">{href ? <a href={withBase(href)}>{title}</a> : title}</p>
+	<div class="body"><slot /></div>
+</div>
+<style>
+	.level {
+		position: relative;
+		box-sizing: border-box;
+		width: 100%;
+		padding: 1em 1.5em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 10px;
+		background: #fff;
+		text-align: center;
+		transition:
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
+	}
+	/* Each level is wider than the one above it. */
+	.level:nth-child(1) {
+		width: 62%;
+	}
+	.level:nth-child(2) {
+		width: 81%;
+	}
+	.level:nth-child(3) {
+		width: 100%;
+	}
+	@media (max-width: 720px) {
+		.level {
+			padding: 0.9em 1em;
+		}
+		.level:nth-child(1) {
+			width: 80%;
+		}
+		.level:nth-child(2) {
+			width: 90%;
+		}
+	}
+	.level:has(a:hover) {
+		border-color: var(--accent);
+		box-shadow: var(--box-shadow);
+	}
+	.highlight {
+		border-color: var(--accent);
+		background: rgb(var(--accent-tint));
+	}
+	.eyebrow {
+		margin: 0;
+		color: var(--accent);
+		font-size: 0.7em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.title {
+		margin: 0 0 0.3em;
+		color: rgb(var(--black));
+		font-size: 1.1em;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+	.title a {
+		color: inherit;
+		text-decoration: none;
+	}
+	/* Make the whole level clickable. */
+	.title a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 10px;
+	}
+	.body {
+		font-size: 0.85em;
+		line-height: 1.5;
+	}
+	.body > :global(:last-child) {
+		margin-bottom: 0;
+	}
+	.body :global(p) {
+		margin: 0 0 0.4em;
+	}
+</style>

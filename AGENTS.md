@@ -26,5 +26,5 @@ Consult these guides before working on related tasks:
 - Site text lives in `src/content/` as MDX; layouts, components, and styles render it. Keep prose out of `.astro` files.
 - `src/content/pages/` holds standalone pages. `index.mdx` is the home page (rendered by `src/pages/index.astro`); the rest are rendered by `src/pages/[page].astro`.
 - `src/content/guides/` and `src/content/case-studies/` are article collections. Each folder's `index.mdx` is the section intro. Entries with `draft: true` are listed as "Coming soon" and get no page.
-- MDX components (`Callout`, `Card`, `CardGrid`, `NextTokenDemo`) are passed in by the layouts from `src/components/mdx/index.ts`, so MDX files don't import them.
+- MDX components (`Callout`, `Card`, `CardGrid`, `NextTokenDemo`, `Pyramid`, `PyramidLevel`) are passed in by the layouts from `src/components/mdx/index.ts`, so MDX files don't import them.
 - The site is served from the root of https://faithfulautomation.org, with no base path. Links still go through `withBase()` (`src/utils/paths.ts`) in `.astro` files and the `a` override (`src/components/mdx/ContentLink.astro`) in MDX, so a `base` can be added to `astro.config.mjs` later without touching content.

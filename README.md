@@ -1,8 +1,10 @@
 # Faithful Automation
 
-**A framework of questions for discerning whether and how to use AI**
+**A framework of questions for discerning whether and how to use AI in our vocations**
 
-Faithful Automation is meant to be used one task at a time. It doesn't assume AI is inherently good or inherently bad. Rather, it asks about purpose, truth, thinking, and relationships before, during, and after you use AI.
+Faithful Automation is meant to be used one task at a time. It doesn't assume AI is inherently good or inherently bad. Rather, it asks about intent, truth, stewardship, and human connection.
+
+The framework is written from a Christian perspective. It starts from our reliance on Christ's faithfulness and wisdom (John 15:5, 2 Timothy 2:13, Proverbs 13:20, Luke 6:40, James 1:5), and it's meant to be useful to anyone.
 
 Website: <https://faithfulautomation.org/>
 
@@ -21,26 +23,27 @@ Faithful Automation helps individuals and organizations answer questions such as
 
 ## The framework
 
-**Approach** (before a task)
+As we discern whether and how to use AI in our vocations, we ask ourselves:
 
-1. What task am I completing, and what is its purpose?
-2. What is my intent in using AI for this task?
+1. **Intent:** What is my task, its purpose, and my intent in using AI to assist in completing it or to automate it entirely?
+2. **Truth:** How am I anchoring truth, knowing AI is neither transparent nor inherently trustworthy?
+3. **Stewardship:** How am I stewarding my own thinking, my time, and my gifts, recognizing the formative nature of this task?
+4. **Connection:** How is my use of AI displacing human connection that would otherwise occur when completing this task?
 
-**Engage** (while working)
+## The AI Literacy Framework
 
-3. How am I anchoring truth, knowing AI is neither transparent nor fully trustworthy?
-4. How am I stewarding my own thinking, knowing that tasks shape who I become?
+Faithful Automation is the middle level of a three-level AI Literacy Framework:
 
-**Reflect** (afterward)
-
-5. Did AI replace human connections that strengthen my relationships?
-6. How did AI affect the joy I find in my work?
+1. **Foundational human competency** (bottom): human knowledge, skill, and experience, independent of AI.
+2. **Wisdom and discernment** (middle): examining intent, anchoring truth, stewarding, and directing all our work toward the service of others. This is the Faithful Automation framework.
+3. **AI skill** (top): using AI technologies to solve problems within our vocations while minimizing the associated risks.
 
 ## Website contents
 
 - **What is AI?** A plain-language explanation of large language models, tokens, training data, retrieval, and reasoning, and why today's foundation models are effectively black boxes.
 - **AI & Humans:** What research shows about how AI tends to behave (hallucination, overconfidence, sycophancy) and how people tend to use it (automation bias, anthropomorphism, and the pull of instant answers).
-- **Framework:** The six questions above, with practical guidance for each.
+- **Framework:** The Christian foundation of the project and the four questions above, with practical guidance for each.
+- **AI Literacy:** The three-level AI Literacy Framework, with Faithful Automation as its middle level.
 - **Guides** (in progress): Practical guidance for specific contexts, starting with teaching, learning, and coding.
 - **Case Studies** (in progress): Real and hypothetical scenarios showing that good decisions about AI often require more than a simple "use AI" or "don't use AI."
 - **Resources:** A curated list of the research and explainers cited on the site.
@@ -48,6 +51,8 @@ Faithful Automation helps individuals and organizations answer questions such as
 
 ## Core convictions
 
+- Christ is faithful, and the wisdom we need comes from God, not from our tools.
+- Our work is a vocation, a calling through which God serves our neighbors.
 - Technology is a tool, not an authority.
 - Efficiency is valuable. It just isn't the highest good.
 - People are more than producers of output.
@@ -94,6 +99,7 @@ MDX files can use these components without importing them:
 | `<Callout title="…" variant="note \| caution \| blackbox">` | A highlighted aside |
 | `<CardGrid>` with `<Card title="…" href="…" eyebrow="…">` | A grid of linked cards |
 | `<NextTokenDemo prompt="…" choices={[{ token: '…', probability: 40 }]} />` | The interactive next-token demo |
+| `<Pyramid label="…">` with `<PyramidLevel title="…" eyebrow="…" href="…" highlight>` | A stacked pyramid; write levels top to bottom |
 
 ### Commands
 
