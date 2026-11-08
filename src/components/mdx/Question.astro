@@ -1,0 +1,62 @@
+---
+// One row of a <QuestionList>: a question that links to the page answering it.
+import { withBase } from '../../utils/paths';
+
+interface Props {
+	href: string;
+	// A short label shown above the question (e.g., "Intent").
+	label?: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<div class="question" role="listitem">
+	<a href={withBase(href)}>
+		<span class="text">
+			{label && <span class="label">{label}</span>}
+			<span class="ask"><slot /></span>
+		</span>
+		<span class="arrow" aria-hidden="true">→</span>
+	</a>
+</div>
+<style>
+	a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+		padding: 0.85em 0.25em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		color: rgb(var(--black));
+		text-decoration: none;
+	}
+	.text {
+		display: flex;
+		flex-direction: column;
+	}
+	.label {
+		color: var(--accent);
+		font-size: 0.65em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		line-height: 1.6;
+		text-transform: uppercase;
+	}
+	.ask {
+		font-size: 1.1em;
+		font-weight: 700;
+		line-height: 1.35;
+	}
+	.arrow {
+		flex-shrink: 0;
+		color: var(--accent);
+		transition: transform 0.2s ease;
+	}
+	a:hover .ask {
+		color: var(--accent);
+	}
+	a:hover .arrow {
+		transform: translateX(0.25em);
+	}
+</style>

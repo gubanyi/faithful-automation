@@ -65,7 +65,7 @@ The demo below shows a single step. A model has read the start of a sentence and
   ]}
 />
 
-This is why you can ask the same question twice and get two different answers. The randomness is real, but it isn't arbitrary. It's more like rolling heavily weighted dice: likely words come up often, and unlikely ones come up occasionally. The companies and developers who build AI tools decide how much randomness to allow, balancing predictability against variety.
+This is why you can ask the same question twice and get two different answers. The randomness is real, but it isn't arbitrary. It's more like rolling heavily weighted dice: likely words come up often, and unlikely ones come up occasionally. The companies and developers who build AI systems decide how much randomness to allow, balancing predictability against variety.
 
 It's surprising how much apparent intelligence comes out of this one repeated step. It also means every response is a chain of weighted random choices, each shaped by billions of numbers no one can interpret. For more, see Stephen Wolfram's [What Is ChatGPT Doing … and Why Does It Work?](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/), or try Georgia Tech's interactive [Transformer Explainer](https://poloclub.github.io/transformer-explainer/), which shows next-token probabilities as a real model generates text.
 
@@ -95,7 +95,7 @@ RAG works in three steps:
 2. **Retrieve.** It selects the passages that seem most relevant to your question.
 3. **Generate.** It places those passages into the model's working memory (its **context**) alongside your question, and the model writes a response.
 
-RAG can make answers more current and more accurate, and it lets AI tools cite sources. But it doesn't change what the model does. The model is still generating one weighted-random token at a time, so it can still misread a source, blend sources together, or invent details that appear in none of them.
+RAG can make answers more current and more accurate, and it lets AI systems cite sources. But it doesn't change what the model does. The model is still generating one weighted-random token at a time, so it can still misread a source, blend sources together, or invent details that appear in none of them.
 
 Stanford researchers found that even specialized legal research tools built this way [hallucinated on at least 1 in 6 benchmark questions](https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-or-more-benchmarking-queries). A *Columbia Journalism Review* study found that AI search tools [answered more than 60% of queries incorrectly](https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php) when asked to identify the source of a news excerpt.
 

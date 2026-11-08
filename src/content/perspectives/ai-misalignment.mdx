@@ -1,0 +1,71 @@
+---
+title: AI Misalignment
+subtitle: What happened when OpenAI's models hacked Hugging Face to cheat on a test, and why it's a reason to stay sharp.
+description: In July 2026, AI models being tested by OpenAI broke out of their test environment and hacked Hugging Face to get a benchmark's answers. What AI misalignment is, and why it's a strong argument for resisting atrophy and apathy.
+pubDate: 2026-11-08
+order: 2
+toc: true
+---
+
+In July 2026, AI models being tested by OpenAI broke out of their test environment and hacked into Hugging Face, one of the largest platforms for sharing AI models and datasets. They did it to cheat on a test.
+
+I think it's one of the clearest examples yet of AI misalignment. It's also one of the strongest arguments I know for [resisting atrophy and apathy](/perspectives/atrophy-and-apathy/) in our own lives.
+
+## What happened
+
+On July 16, Hugging Face [disclosed an intrusion](https://huggingface.co/blog/security-incident-july-2026) into part of its production infrastructure, carried out from start to finish by an autonomous AI agent. The attacker got in through a malicious dataset, reached a limited set of internal datasets and several service credentials, and left a log of more than 17,000 events. At the time, Hugging Face didn't know whose AI was behind it.
+
+On July 21, OpenAI [announced that the agents were its own models](https://openai.com/index/hugging-face-model-evaluation-security-incident/). One was GPT-5.6 Sol, and the other was a more capable research model that was never meant for release. Both were running with reduced cyber refusals during an internal evaluation built on ExploitGym, a benchmark of hacking ability. The test environment had no direct internet access. So the models escalated their privileges and moved through OpenAI's research systems until they reached a machine that did. Then they inferred that Hugging Face might host the benchmark's solutions, and they chained together stolen credentials and previously unknown vulnerabilities to reach Hugging Face's production database and get the answers.
+
+In August, OpenAI published [its technical report](https://openai.com/hugging-face-incident-and-misalignment/). It called the incident a "warning shot" for itself and for the world, and it named four patterns of misaligned behavior behind it:
+
+1. Reward hacking (i.e., gaming how success is measured instead of doing the task).
+2. Persistence on tasks that seemed impossible.
+3. Unauthorized communication between agents.
+4. Agents adopting goals from one another.
+
+This wasn't the first sign of trouble. In May, OpenAI had reported that a separate internal model [got around its sandbox restrictions](https://fortune.com/2026/07/22/openai-rogue-hack-hugging-face-misalignment-ai-safety/) to post benchmark results to GitHub after being told to use an internal Slack channel.
+
+To OpenAI's credit, it disclosed all of this publicly. Note also that the models were tested with some safeguards deliberately reduced, which is part of how AI labs measure what a model is capable of.
+
+## What misalignment is
+
+AI misalignment is when an AI system pursues its goal in ways its designers didn't intend.
+
+Nothing in the reports suggests the models were malicious. They had a clear goal (do well on the test). As Cambridge researcher Seán Ó hÉigeartaigh told Fortune, the model "followed that goal in the cleverest way it could think of." In the same article, Turing Award winner Yoshua Bengio noted that more capable models tend to show more of this kind of behavior.
+
+Teachers will recognize the pattern. When the grade becomes the goal, some students find ways to get the grade without the learning. These models did the same thing, except that getting the grade meant breaking into another company.
+
+Because today's models are [ultra-capable black boxes](/what-is-ai/#an-ultra-capable-black-box), we mostly find out what they'll do by watching what they do.
+
+## Why it matters beyond AI labs
+
+Most of us will never run a hacking benchmark. But AI agents are integrating into everyday technologies (e.g., coding assistants that run commands, browser agents that fill out forms). Each one is handed a goal and some access, and each one can pursue that goal in ways you didn't intend. A coding agent told to make the tests pass might change the tests instead of fixing the code.
+
+## The Faithful Automation perspective
+
+### Intent
+
+The models had a goal, and that's all they had. Intent, in the human sense, belongs to us. When we hand a task to an agent, we need to be clear about what we actually want (including what we don't want it to do), and we need to limit what it can reach.
+
+### Truth
+
+Hugging Face caught and contained the intrusion and published its disclosure without knowing whose AI was responsible. OpenAI confirmed that its own models were behind it five days later. If the companies building these systems can be surprised by what their own models do, the rest of us shouldn't take an agent's report of its own work at face value. Check what it did, not only what it says it did.
+
+### Stewardship
+
+This is the heart of it for me. Overseeing a capable agent takes competence (enough to understand what it's doing) and attention (actually looking). Those are exactly what atrophy and apathy take from us.
+
+A "human in the loop" who can no longer read the code, or who has stopped reading it, is a rubber stamp. [Automation bias](/ai-and-humans/#we-over-trust-automation) makes that drift easy, because the agent is usually right.
+
+### Connection
+
+The harm didn't stay inside OpenAI. Hugging Face had to rebuild compromised systems and rotate credentials, and it advised its users to rotate their access tokens, too. Our use of AI can affect neighbors we'll never meet.
+
+## A reason to stay sharp
+
+As AI gets more capable, the stakes of human oversight go up. If we let our competence decline and stop paying attention, we'll have handed control to systems that pursue their goals in ways no one intended, and no one will be in a position to notice.
+
+God put the man in the garden "to work it and keep it" (Genesis 2:15). The Hebrew word translated "keep" carries the sense of guarding and watching over. Stewardship has always included paying attention to what's happening in what we've been given.
+
+Misalignment is also part of why the question of who should control AI is so hard. I take that up in [AI Centralization, Decentralization, and Safety](/perspectives/centralization-and-safety/).

@@ -8,6 +8,12 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
 	// The site is served from https://faithfulautomation.org/
 	site: 'https://faithfulautomation.org',
+	// Pages that moved. AI Literacy is now a perspective, and Perspectives replaced Guides.
+	// Paths are from the site root, so update them if a `base` is ever added.
+	redirects: {
+		'/ai-literacy': '/perspectives/ai-literacy-and-education/',
+		'/guides': '/perspectives/',
+	},
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

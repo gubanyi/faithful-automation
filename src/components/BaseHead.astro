@@ -14,7 +14,7 @@ interface Props {
 	image?: ImageMetadata;
 	imageAlt?: string;
 	// Dated content (e.g., case studies) is described to search engines as an article.
-	article?: { headline: string; publishedDate: Date; updatedDate?: Date };
+	article?: { headline: string; publishedDate: Date; updatedDate?: Date; author?: string };
 	// Other structured data (https://schema.org), e.g., WebSite on the home page.
 	structuredData?: Record<string, unknown>;
 }
@@ -43,7 +43,7 @@ const articleData = article && {
 	dateModified: (article.updatedDate ?? article.publishedDate).toISOString(),
 	author: {
 		'@type': 'Person',
-		name: SITE_AUTHOR,
+		name: article.author ?? SITE_AUTHOR,
 		url: new URL(withBase('/about/'), Astro.site).href,
 	},
 	mainEntityOfPage: canonicalURL.href,

@@ -34,11 +34,21 @@ const structuredData = {
 			imageAlt={heroAlt}
 			structuredData={structuredData}
 		/>
+		<style>
+			/* The home page is a few short lists of questions, so its headings are smaller. */
+			.home :global(h2) {
+				margin-top: 2em;
+				font-size: 1.5em;
+			}
+			.home :global(h2:first-child) {
+				margin-top: 0;
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<Hero title={title} subtitle={subtitle} image={heroImage} alt={heroAlt} credit={heroCredit} />
-		<main class="prose">
+		<main class="prose home">
 			<Content components={mdxComponents} />
 		</main>
 		<Footer />

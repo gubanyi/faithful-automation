@@ -117,7 +117,7 @@ const { Content } = await render(intro);
 			<ul class="entries">
 				{
 					entries.map((entry) => {
-						const { title, description, pubDate, heroImage, heroAlt = '', draft } = entry.data;
+						const { title, description, author, pubDate, heroImage, heroAlt = '', draft } = entry.data;
 						const Tag = draft ? 'div' : 'a';
 						return (
 							<li class:list={{ draft }}>
@@ -128,9 +128,15 @@ const { Content } = await render(intro);
 									{heroImage && <Image width={720} height={360} src={heroImage} alt={heroAlt} />}
 									{draft && <p class="badge">Coming soon</p>}
 									<h2 class="entry-title">{title}</h2>
-									{pubDate && (
+									{!draft && (
 										<p class="date">
-											<FormattedDate date={pubDate} />
+											By {author}
+											{pubDate && (
+												<>
+													{' · '}
+													<FormattedDate date={pubDate} />
+												</>
+											)}
 										</p>
 									)}
 									<p class="description">{description}</p>

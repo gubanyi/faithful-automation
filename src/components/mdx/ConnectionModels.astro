@@ -1,0 +1,13 @@
+---
+// A grid of <ConnectionModel> diagrams.
+---
+
+<div class="connection-models"><slot /></div>
+<style>
+	.connection-models {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+		gap: 1em;
+		margin: 0 0 1.5em;
+	}
+</style>

@@ -1,0 +1,70 @@
+---
+title: AI Centralization, Decentralization, and Safety
+subtitle: Who should control AI? Every answer carries real risks, which leaves Christians in a complex position.
+description: The trade-offs between centralized AI (a few companies with the resources to build and run frontier models) and decentralized AI (open-weight models anyone can download and modify), and where that leaves Christians.
+pubDate: 2026-11-08
+order: 3
+toc: true
+---
+
+Who should control AI? Right now, two answers pull against each other.
+
+One is **centralization**. A handful of companies build and run the most capable models, and the rest of us use them through apps and services. The other is **decentralization**. Developers release open-weight models (i.e., models whose parameters [anyone can download](/what-is-ai/#trained-on-data-we-cant-see)), and anyone with the hardware can modify them and run them on their own computers.
+
+Both have real benefits, and both carry real risks.
+
+## Centralization
+
+### Why AI is centralizing
+
+AI models require an immense amount of resources to train and deploy, which makes it very hard for most organizations to compete.
+
+Training is expensive and getting more so. Epoch AI estimates that the cost of training frontier models has grown about [2.4 times per year since 2016](https://epoch.ai/blog/how-much-does-it-cost-to-train-frontier-ai-models). If that trend holds, the largest training runs will cost more than a billion dollars by 2027, and only the best-funded organizations will be able to afford them.
+
+Deploying them to millions of people takes even more. In 2026, Alphabet, Amazon, Meta, and Microsoft together planned to spend about [$725 billion on capital expenditures](https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion), much of it on AI data centers.
+
+In practice, that means a few companies decide how the most capable models behave and what they cost.
+
+### What centralization offers
+
+A company that runs a model can watch how it's used and stop misuse. In August 2025, Anthropic reported that it had [disrupted a criminal operation](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025) that used its coding agent to steal and extort data from at least 17 organizations, including healthcare providers, emergency services, government agencies, and religious institutions.
+
+A company can also fix a problem for everyone at once. When OpenAI realized an update had made ChatGPT overly flattering, it [rolled the update back](/ai-and-humans/#it-tells-you-what-you-want-to-hear).
+
+### What it costs
+
+Centralization means trusting a few companies with a great deal, including our data and decisions about how the models behave. And those companies [disclose little](/what-is-ai/#trained-on-data-we-cant-see) about how their models are built.
+
+Centralization doesn't guarantee safety, either. The [Hugging Face incident](/perspectives/ai-misalignment/) was caused by a leading lab's own models, running inside its own research environment.
+
+## Decentralization
+
+### What decentralization offers
+
+Open-weight models spread AI's capabilities beyond a few large companies. In 2024, the U.S. National Telecommunications and Information Administration (NTIA) reported that they [widen the range of people and organizations](https://www.ntia.gov/issues/artificial-intelligence/open-model-weights-report) who can build with AI and let users run models without sharing their data with third parties. NTIA recommended monitoring the risks rather than restricting open-weight models at that time.
+
+The Hugging Face incident offers a concrete example. When Hugging Face's team investigated the attack, the hosted frontier models they first tried refused to help, because the attacker's activity looked like hacking. So they [ran the analysis on an open-weight model](https://huggingface.co/blog/security-incident-july-2026) on their own servers. That choice also kept the attacker's data, and the credentials it referenced, inside their own environment.
+
+### The safety problem
+
+Decentralization raises safety issues that are hard to solve.
+
+The first is that AI systems can enable bad actors. Once a model's weights are released, they can't be recalled, and the safety training built into them can be removed. The [International AI Safety Report 2026](https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026), written by more than 100 experts, flags this directly: safeguards on open-weight models are easier to strip out, and their use is harder to monitor.
+
+One technique for removing them is called **abliteration**. Researchers found that in 13 popular open-weight chat models, the behavior of refusing harmful requests was controlled by [a single direction inside the model](https://arxiv.org/abs/2406.11717). Removing that direction from the model's weights nearly eliminated refusals, while leaving the rest of the model largely intact. Since that research was published in 2024, [several open-source tools](https://arxiv.org/abs/2512.13655) have emerged to automate the process.
+
+Compare that with the Anthropic case above. With a model a company runs, someone can notice misuse and shut it down. With an abliterated model running on someone's own computer, no one else is watching.
+
+The second issue is [misalignment](/perspectives/ai-misalignment/). OpenAI's own security team spotted its models' behavior during the Hugging Face incident. An open-weight agent running on a private server has no such team, only its operator, who may not be paying attention. And according to the same safety report, the best open-weight models trail the best closed models by only about a year. Capabilities like the ones in the Hugging Face incident likely won't stay inside a few labs for long.
+
+## Where this leaves Christians
+
+The centralization and decentralization question leaves Christians in a complex position. Centralization concentrates power and trust in a few companies. Decentralization puts capable tools in anyone's hands, including people who intend harm, and makes misalignment harder to catch. I don't think there's a clean answer, and I'm wary of anyone who says there is.
+
+Some of this will be settled by governments. Christians have a part in that as citizens, which is a vocation, too. At the very least, we're called to pray for those in authority (1 Timothy 2:1–2).
+
+But most of us won't decide AI policy. As individuals serving in various vocations, we can focus on Christ's work in our lives, and on whether and how AI can help us live out those vocations. That's what the [four questions](/framework/#the-four-questions) are for.
+
+In practice, it also means knowing what kind of AI you're using and where your data goes. (For example, I use Copilot through my university account for course content, [partly for its data protections](/case-studies/course-content/#why-i-use-copilot-with-enterprise-data-protection).)
+
+How all of this should shape teaching and learning is the subject of [AI Literacy and Education](/perspectives/ai-literacy-and-education/).

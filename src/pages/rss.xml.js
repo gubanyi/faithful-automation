@@ -4,7 +4,7 @@ import { getPublished, SECTION_PATHS } from '../utils/content';
 import { withBase } from '../utils/paths';
 
 /** @type {import('../utils/content').Section[]} */
-const SECTIONS = ['guides', 'caseStudies'];
+const SECTIONS = ['caseStudies', 'perspectives'];
 
 export async function GET(context) {
 	const items = [];

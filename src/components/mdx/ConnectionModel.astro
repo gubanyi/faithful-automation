@@ -1,0 +1,196 @@
+---
+// One model of how people connect, drawn as a small diagram with a caption.
+//   direct:       two people, connected to each other.
+//   alongside:    the people stay connected, and technology connects to each of them.
+//   between:      technology sits between the people, and they connect through it.
+//   replacement:  a person connects with an AI that acts like a person; the neighbor fades.
+
+type Model = 'direct' | 'alongside' | 'between' | 'replacement';
+type Kind = 'person' | 'technology' | 'ai';
+
+interface Node {
+	kind: Kind;
+	x: number;
+	y: number;
+	label: string;
+	faded?: boolean;
+}
+
+interface Link {
+	from: number;
+	to: number;
+	// Human connection, a connection to technology, or a connection that has faded.
+	kind: 'human' | 'technology' | 'faded';
+	// Bends the line upward by this much (a quadratic curve).
+	bend?: number;
+}
+
+interface Props {
+	model: Model;
+	title: string;
+}
+
+const { model, title } = Astro.props;
+
+const MODELS: Record<Model, { nodes: Node[]; links: Link[] }> = {
+	direct: {
+		nodes: [
+			{ kind: 'person', x: 60, y: 70, label: 'You' },
+			{ kind: 'person', x: 180, y: 70, label: 'Neighbor' },
+		],
+		links: [{ from: 0, to: 1, kind: 'human' }],
+	},
+	alongside: {
+		nodes: [
+			{ kind: 'person', x: 50, y: 88, label: 'You' },
+			{ kind: 'person', x: 190, y: 88, label: 'Neighbor' },
+			{ kind: 'technology', x: 120, y: 30, label: 'Technology' },
+		],
+		links: [
+			{ from: 0, to: 1, kind: 'human' },
+			{ from: 0, to: 2, kind: 'technology' },
+			{ from: 1, to: 2, kind: 'technology' },
+		],
+	},
+	between: {
+		nodes: [
+			{ kind: 'person', x: 40, y: 70, label: 'You' },
+			{ kind: 'technology', x: 120, y: 70, label: 'Technology' },
+			{ kind: 'person', x: 200, y: 70, label: 'Neighbor' },
+		],
+		links: [
+			{ from: 0, to: 1, kind: 'technology' },
+			{ from: 1, to: 2, kind: 'technology' },
+		],
+	},
+	replacement: {
+		nodes: [
+			{ kind: 'person', x: 40, y: 80, label: 'You' },
+			{ kind: 'ai', x: 120, y: 80, label: 'AI' },
+			{ kind: 'person', x: 200, y: 80, label: 'Neighbor', faded: true },
+		],
+		links: [
+			{ from: 0, to: 1, kind: 'human' },
+			{ from: 0, to: 2, kind: 'faded', bend: 60 },
+		],
+	},
+};
+
+const { nodes, links } = MODELS[model];
+
+const linkPath = ({ from, to, bend = 0 }: Link) => {
+	const a = nodes[from];
+	const b = nodes[to];
+	if (!bend) return `M${a.x} ${a.y} L${b.x} ${b.y}`;
+	return `M${a.x} ${a.y - 24} Q${(a.x + b.x) / 2} ${Math.min(a.y, b.y) - 24 - bend} ${b.x} ${b.y - 24}`;
+};
+
+// A head and shoulders, centered on (x, y).
+const personPath = (x: number, y: number) =>
+	`M${x - 15} ${y + 14} C${x - 15} ${y - 4} ${x + 15} ${y - 4} ${x + 15} ${y + 14} Z`;
+---
+
+<figure class="model">
+	<svg viewBox="0 0 240 132" aria-hidden="true">
+		{links.map((link) => <path class:list={['link', link.kind]} d={linkPath(link)} />)}
+		{
+			nodes.map(({ kind, x, y, label, faded }) => (
+				<g class:list={['node', kind, { faded }]}>
+					{kind === 'technology' ? (
+						<>
+							<rect class="device" x={x - 19} y={y - 14} width="38" height="28" rx="5" />
+							<rect class="screen" x={x - 14} y={y - 9} width="28" height="15" rx="2" />
+						</>
+					) : (
+						<>
+							{kind === 'ai' ? (
+								<rect class="head" x={x - 8.5} y={y - 21.5} width="17" height="17" rx="4" />
+							) : (
+								<circle class="head" cx={x} cy={y - 13} r="8.5" />
+							)}
+							<path class="body" d={personPath(x, y)} />
+						</>
+					)}
+					<text x={x} y={y + 33}>
+						{label}
+					</text>
+				</g>
+			))
+		}
+	</svg>
+	<figcaption>
+		<span class="title">{title}</span>
+		<slot />
+	</figcaption>
+</figure>
+<style>
+	.model {
+		margin: 0;
+		padding: 1em 1.25em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 12px;
+		background: #fff;
+	}
+	svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-bottom: 0.5em;
+	}
+	.link {
+		fill: none;
+		stroke-linecap: round;
+	}
+	.link.human {
+		stroke: var(--warm);
+		stroke-width: 3.5;
+	}
+	.link.technology {
+		stroke: var(--accent);
+		stroke-width: 2.5;
+	}
+	.link.faded {
+		stroke: rgb(var(--gray));
+		stroke-width: 2;
+		stroke-dasharray: 3 6;
+		opacity: 0.45;
+	}
+	.person .head,
+	.person .body {
+		fill: rgb(var(--gray-dark));
+	}
+	/* AI is drawn like a person, but in the color of technology and with a square head. */
+	.ai .head,
+	.ai .body {
+		fill: var(--accent);
+	}
+	.device {
+		fill: var(--accent);
+	}
+	.screen {
+		fill: #fff;
+		opacity: 0.35;
+	}
+	.faded {
+		opacity: 0.25;
+	}
+	text {
+		fill: rgb(var(--gray-dark));
+		font-family: inherit;
+		font-size: 11px;
+		font-weight: 700;
+		text-anchor: middle;
+	}
+	figcaption {
+		font-size: 0.85em;
+		line-height: 1.5;
+	}
+	.title {
+		display: block;
+		color: rgb(var(--black));
+		font-weight: 700;
+	}
+	figcaption > :global(p) {
+		margin: 0;
+	}
+</style>

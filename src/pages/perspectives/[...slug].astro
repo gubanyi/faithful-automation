@@ -1,0 +1,23 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import { mdxComponents } from '../../components/mdx';
+import Page from '../../layouts/Page.astro';
+import { getPublished, getSectionIntro } from '../../utils/content';
+
+export async function getStaticPaths() {
+	const perspectives = await getPublished('perspectives');
+	return perspectives.map((perspective) => ({
+		params: { slug: perspective.id },
+		props: perspective,
+	}));
+}
+type Props = CollectionEntry<'perspectives'>;
+
+const perspective = Astro.props;
+const intro = await getSectionIntro('perspectives');
+const { Content, headings } = await render(perspective);
+---
+
+<Page {...perspective.data} note={intro.data.entryNote} headings={headings}>
+	<Content components={mdxComponents} />
+</Page>

@@ -1,6 +1,6 @@
 # Faithful Automation
 
-**A framework of questions for discerning whether and how to use AI in our vocations**
+**Answers about AI and questions for Christians who use it**
 
 Faithful Automation is meant to be used one task at a time. It doesn't assume AI is inherently good or inherently bad. Rather, it asks about intent, truth, stewardship, and human connection.
 
@@ -32,7 +32,7 @@ As we discern whether and how to use AI in our vocations, we ask ourselves:
 
 ## The AI Literacy Framework
 
-Faithful Automation is the middle level of a three-level AI Literacy Framework:
+Faithful Automation is the middle level of a three-level AI Literacy Framework, presented in the *AI Literacy and Education* perspective:
 
 1. **Foundational human competency** (bottom): human knowledge, skill, and experience, independent of AI.
 2. **Wisdom and discernment** (middle): examining intent, anchoring truth, stewarding, and directing all our work toward the service of others. This is the Faithful Automation framework.
@@ -43,9 +43,8 @@ Faithful Automation is the middle level of a three-level AI Literacy Framework:
 - **What is AI?** A plain-language explanation of large language models, tokens, training data, retrieval, and reasoning, and why today's foundation models are effectively black boxes.
 - **AI & Humans:** What research shows about how AI tends to behave (hallucination, overconfidence, sycophancy) and how people tend to use it (automation bias, anthropomorphism, and the pull of instant answers).
 - **Framework:** The Christian foundation of the project and the four questions above, with practical guidance for each.
-- **AI Literacy:** The three-level AI Literacy Framework, with Faithful Automation as its middle level.
-- **Guides** (in progress): Practical guidance for specific contexts, starting with teaching, learning, and coding.
-- **Case Studies** (in progress): Real and hypothetical scenarios showing that good decisions about AI often require more than a simple "use AI" or "don't use AI."
+- **Case Studies:** Real and hypothetical scenarios worked through with the four questions, showing that good decisions about AI often require more than a simple "use AI" or "don't use AI." Each is signed by its author.
+- **Perspectives:** Signed, personal perspectives from Christian authors on bigger questions (e.g., human atrophy and AI advancement, AI misalignment, who controls AI, and AI literacy and education).
 - **Resources:** A curated list of the research and explainers cited on the site.
 - **About:** Who is behind the project, and the questions it starts from.
 
@@ -74,8 +73,8 @@ The site is built with [Astro](https://astro.build) using the [Astro blog theme]
 src/
 ├── content/              all site text (MDX)
 │   ├── pages/            standalone pages; index.mdx is the home page
-│   ├── guides/           index.mdx is the section intro; other files are guides
-│   └── case-studies/     index.mdx is the section intro; other files are case studies
+│   ├── case-studies/     index.mdx is the section intro; other files are case studies
+│   └── perspectives/     index.mdx is the section intro; other files are perspectives
 ├── components/           header, footer, hero, and MDX components
 ├── layouts/              page and section layouts
 ├── pages/                routes that render the content
@@ -89,7 +88,7 @@ src/
 - **Home page title, subtitle, and hero image:** the frontmatter of `src/content/pages/index.mdx`.
 - **Navigation links:** `src/consts.ts`.
 - **A new page:** add `src/content/pages/<name>.mdx` with a `title` and `description`. It is published at `/<name>/`.
-- **A new guide or case study:** add an MDX file to `src/content/guides/` or `src/content/case-studies/`. Set `draft: true` to list it as "Coming soon" without publishing a page; add a `pubDate` when it goes live.
+- **A new case study or perspective:** add an MDX file to `src/content/case-studies/` or `src/content/perspectives/`. Set `draft: true` to list it as "Coming soon" without publishing a page; add a `pubDate` when it goes live. Entries are signed: `author` defaults to the site author, and the section's `entryNote` (set in its `index.mdx`) appears at the top of every entry. Use `order` to set the order of entries published on the same day.
 - **Links:** write internal links from the site root (for example, `/framework/`). External links open in a new tab.
 
 MDX files can use these components without importing them:
@@ -98,6 +97,8 @@ MDX files can use these components without importing them:
 | :-- | :-- |
 | `<Callout title="…" variant="note \| caution \| blackbox">` | A highlighted aside |
 | `<CardGrid>` with `<Card title="…" href="…" eyebrow="…">` | A grid of linked cards |
+| `<QuestionList>` with `<Question href="…" label="…">` | A list of questions, each linking to its answer (used on the home page) |
+| `<ConnectionModels>` with `<ConnectionModel model="direct \| alongside \| between \| replacement" title="…">` | Diagrams of how technology shapes human connection |
 | `<NextTokenDemo prompt="…" choices={[{ token: '…', probability: 40 }]} />` | The interactive next-token demo |
 | `<Pyramid label="…">` with `<PyramidLevel title="…" eyebrow="…" href="…" highlight>` | A stacked pyramid; write levels top to bottom |
 

@@ -12,6 +12,8 @@ interface Props {
 	title: string;
 	description: string;
 	subtitle?: string;
+	// Signed entries (case studies and perspectives) show a byline.
+	author?: string;
 	pubDate?: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
@@ -19,12 +21,15 @@ interface Props {
 	toc?: boolean;
 	next?: { title: string; href: string };
 	headings?: MarkdownHeading[];
+	// A short note shown beneath the title (e.g., the section's `entryNote`).
+	note?: string;
 }
 
 const {
 	title,
 	description,
 	subtitle,
+	author,
 	pubDate,
 	updatedDate,
 	heroImage,
@@ -32,6 +37,7 @@ const {
 	toc = false,
 	next,
 	headings = [],
+	note,
 } = Astro.props;
 
 const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth === 3) : [];
@@ -45,7 +51,7 @@ const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth ==
 			description={description}
 			image={heroImage}
 			imageAlt={heroAlt || undefined}
-			article={pubDate && { headline: title, publishedDate: pubDate, updatedDate }}
+			article={pubDate && { headline: title, publishedDate: pubDate, updatedDate, author }}
 		/>
 		<style>
 			main {
@@ -92,6 +98,16 @@ const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth ==
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			.note {
+				max-width: 34em;
+				margin: 0 auto 1.25em;
+				padding: 0.6em 1em;
+				border-radius: 8px;
+				background: rgb(var(--warm-tint));
+				color: rgb(var(--gray-dark));
+				font-size: 0.8em;
+				line-height: 1.5;
 			}
 			.toc {
 				margin: 0 0 2.5em;
@@ -170,9 +186,11 @@ const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth ==
 				<div class="prose">
 					<div class="title">
 						{
-							pubDate && (
+							(author || pubDate) && (
 								<div class="date">
-									<FormattedDate date={pubDate} />
+									{author && <span class="author">By {author}</span>}
+									{author && pubDate && <span aria-hidden="true"> · </span>}
+									{pubDate && <FormattedDate date={pubDate} />}
 									{updatedDate && (
 										<div class="last-updated-on">
 											Last updated on <FormattedDate date={updatedDate} />
@@ -183,6 +201,7 @@ const tocHeadings = toc ? headings.filter(({ depth }) => depth === 2 || depth ==
 						}
 						<h1>{title}</h1>
 						{subtitle && <p class="subtitle">{subtitle}</p>}
+						{note && <p class="note">{note}</p>}
 						<hr />
 					</div>
 					{
